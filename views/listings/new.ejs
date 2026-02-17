@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stayvibe</title>
+</head>
+<body>
+    <h3>Add new listing</h3>
+    <form method="post" action="/listings">
+        <input type="text" placeholder="enter title" name="listing[title]">
+        <br><br>
+        <textarea name="listing[description]" id="" placeholder="enter descripton" rows="10" cols="50"></textarea>
+        <br><br>
+        <input type="text" placeholder="enter url/link of image" name="listing[image]">
+        <br><br>
+        <input type="number" placeholder="enter price" name="listing[price]">
+        <br><br>
+        <input type="text" placeholder="enter location" name="listing[location]">
+        <br><br>
+        <input type="text" placeholder="enter country" name="listing[country]">
+        <br><br>
+        <button>add</button>
+    </form>
+</body>
+</html>
