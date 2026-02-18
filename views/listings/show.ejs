@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stayvibe</title>
-</head>
+<% layout('layouts/boilerplate') -%>
 <body>
     <h3>Listing Details</h3>
     <ul>
         <li><%= listingdata.title%></li>
         <li><%= listingdata.description%></li>
+        <div><img src="<%= listingdata.image.url%>" alt="ak"></div>
         <li>&#8377;<%= listingdata.price.toLocaleString("en-IN")%></li>
         <li><%= listingdata.location%></li>
         <li><%= listingdata.country%></li>
@@ -20,4 +15,3 @@
         <button>Delete this listing</button>
     </form>
 </body>
-</html>

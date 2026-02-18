@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>listing</title>
-</head>
+<% layout('layouts/boilerplate') -%>
 <body>
-    <h3>all listing</h3>
-    <form method="get" action="/listings/new">
-        <button>Add Listing</button>
-    </form>
+    <h3>All listing</h3>
     <ul>
         <%for(list of alllisting){%>
             <li><a href="/listings/<%=list._id %>"><%=list.title%></a></li>
         <%} %>
     </ul>
 </body>
-</html>
