@@ -1,9 +1,18 @@
-body{
-    background-color: bisque;
-}
+ body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+ }
+ .conatainer{
+    flex: 1;
+ }
+ .row{
+    margin: 20px !important;
+} 
 .navbar{
     height: 5rem;
     background-color: white;
+   
 }
 
 .fa-compass-drafting{
@@ -44,4 +53,56 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: space-evenly;
+}
+
+/* cards */
+/* .row{
+     margin-left: 42px !important;
+} */
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem;
+    width: 100%;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+    
+}
+
+.card-text.p{
+    font-weight: 400 !important;
+}
+
+.list-link{
+    text-decoration: none;
+}
+
+/* card effect */
+
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+.add-btn{
+    background-color: #fe424d !important;
+    border: none;
+}
+
+.show-img{
+    height: 40vh;
+}
+
+.btns{
+    display: flex;
 }
