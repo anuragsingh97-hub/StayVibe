@@ -1,0 +1,11 @@
+const joi=require("joi");
+module.exports.listingschema=joi.object({
+    listing:joi.object({
+        title:joi.string().required(),
+        description:joi.string().required(),
+        location:joi.string().required(),
+        country:joi.string().required().min(0),
+        price:joi.number().required(),
+        image:joi.string().required(),
+    }).required()
+});
