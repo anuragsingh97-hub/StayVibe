@@ -8,7 +8,8 @@ const ejsmate = require("ejs-mate");
 const ExpressError=require("./utils/ExpressError.js");
 const listings=require("./routes/listing.js");
 const review=require("./routes/review.js");
-
+const session=require("express-session");
+const flash=require("connect-flash");
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -17,6 +18,18 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsmate);
 app.use(express.static(path.join(__dirname,"/public")));
 
+const sessionOptions={
+    secret:"mysupersecretecode",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*24*60*60*1000
+    },
+}
+
+app.use(session(sessionOptions));
+app.use(flash());
 
 main()
 .then(()=>{
@@ -30,7 +43,11 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
+});
 
 //require routes
 app.use("/listings",listings);
