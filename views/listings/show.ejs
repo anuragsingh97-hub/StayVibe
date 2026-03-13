@@ -19,6 +19,7 @@
     </div>
 
     <!-- Buttons -->
+    <% if(currUser && listingdata.owner._id.equals(currUser._id)){ %>
     <div class="btns mt-3">
       <a href="/listings/<%= listingdata._id %>/edit" class="btn btn-dark">Edit</a>
 
@@ -26,7 +27,8 @@
         <button class="btn btn-dark">Delete</button>
       </form>
     </div>
-
+    <% } %>
+    <% if(currUser){ %>
     <!-- Review Form -->
     <div class="mt-4">
       <hr>
@@ -46,11 +48,10 @@
             Please add some comments for review
           </div>
         </div>
-
         <button class="btn btn-outline-dark mb-3">Submit</button>
       </form>
     </div>
-
+    <% } %>
     <!-- All Reviews -->
     <h5><b>All Reviews</b></h5>
 
@@ -59,7 +60,7 @@
 
         <div class="card col-5 ms-2 mb-3">
           <div class="card-body">
-            <h5 class="card-title">Anurag</h5>
+            <h5 class="card-title"><i>@<%=review.author.username%></i></h5>
             <p class="card-text"><%= review.comment %></p>
             <p class="card-text"><%= review.rating %> Stars</p>
           </div>
