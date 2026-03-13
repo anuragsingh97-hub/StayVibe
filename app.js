@@ -22,16 +22,6 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsmate);
 app.use(express.static(path.join(__dirname,"/public")));
 
-const sessionOptions={
-    secret:"mysupersecretecode",
-    resave:false,
-    saveUninitialized:true,
-    cookie:{
-        expires:Date.now()+7*24*60*60*1000,
-        maxAge:7*24*60*60*1000
-    },
-}
-
 main()
 .then(()=>{
     console.log("connected database");
@@ -44,12 +34,23 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
+const sessionOptions={
+    secret:"mysupersecretecode",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*24*60*60*1000
+    },
+}
+
 
 app.use(session(sessionOptions));
 app.use(flash());
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 passport.use(new Localstrategy(User.authenticate()));
 passport.deserializeUser(User.deserializeUser());
 passport.serializeUser(User.serializeUser());
@@ -58,6 +59,7 @@ passport.serializeUser(User.serializeUser());
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
+    res.locals.currUser=req.user;
     next();
 });
 
