@@ -1,34 +1,116 @@
-<% layout('layouts/boilerplate') -%>
+<% layout("/layouts/boilerplate") %>
+<style>
+ #filters{
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ }
+ .filter{
+  text-align: center;
+  margin-top: 1.6rem;
+  margin-right: 1.7rem;
+  opacity: 0.7;
+ }
+ .filter:hover{
+  opacity: 1;
+  cursor: pointer;
+ };
+ .filter p{
+  font-size: 0.8rem;
+ }
+ .gst{
+  display: none;
+ }
+ .tex-toggle
+ {
+  border: 1px solid  black;
+  border-radius: 1rem;
+  height: 2.3rem;
+  padding: 1rem;
+  
+  display: flex;
+  align-items: center;
 
-<h3>All Listings</h3>
+ }
+</style>
 
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3">
-
-    <% for(let list of alllisting){ %>
-
-        <div class="col">
-            <a href="/listings/<%= list._id %>" class="list-link">
-
-                <div class="card listing_card">
-                    <img class="card-img-top"
-                        src="<%= list.image.url %>"
-                        alt="listing image"
-                        style="height:20rem">
-
-                    <div class="card-img-overlay"></div>
-
-                    <div class="card-body">
-                        <p class="card-text">
-                            <b><%= list.title %></b>
-                            <br>
-                            &#8377;<%= list.price.toLocaleString("en-IN") %> / night
-                        </p>
-                    </div>
-                </div>
-
-            </a>
-        </div>
-
-    <% } %>
-
+ 
+   
+    <!-- <form method="get" action="/listings/new">
+        <button>create new listing</button>
+    </form> -->
+    <div id="filters">
+      <div class="filter">
+       <div><i class="fa-solid fa-fire"></i></div> 
+       <p><a href="/listings?search=Trending" class="nav-link">Trending</a></p> 
+      </div>
+      <div class="filter">
+       <div><i class="fa-solid fa-bed"></i></div> 
+       <p><a href="/listings?search=Room" class="nav-link">Room</a></p> 
+      </div>
+       <div class="filter">
+       <div><i class="fa-solid fa-mountain-city"></i></div> 
+       <p><a href="/listings?search=Iconic Cities" class="nav-link">Iconic Cities</a></p> 
+      </div>
+      <div class="filter">
+       <div><i class="fa-solid fa-mountain"></i></div> 
+       <p><a href="/listings?search=Moutains" class="nav-link">Moutains</a></p> 
+      </div>
+       <div class="filter">
+       <div><i class="fa-brands fa-fort-awesome"></i></div> 
+       <p><a href="/listings?search=Castles" class="nav-link">Castles</a></p> 
+      </div>
+      <div class="filter">
+       <div><i class="fa-solid fa-person-swimming"></i></div> 
+       <p><a href="/listings?search=Amazing Pools" class="nav-link">Amazing Pools</a></p> 
+      </div>
+      <div class="filter">
+       <div><i class="fa-solid fa-campground"></i></div> 
+       <p><a href="/listings?search=Camping" class="nav-link">Camping</a></p> 
+      </div>
+      <div class="filter">
+       <div><i class="fa-solid fa-sailboat"></i></div> 
+       <p><a href="/listings?search=Boats" class="nav-link">Boats</a></p> 
+      </div>
+      <div class="tex-toggle">
+        <div class="form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <label class="form-check-label" for="switchCheckDefault">Display total afer texses </label>
 </div>
+      </div>
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1mt-3">
+    <%for(let i of allListing) { %>
+      <a href="/listings/<%= i.id %>" class="listings-link">
+   <div class="card col listing-card">
+  <img src="<%= i.image.url%>" class="card-img-top"style="height: 20rem" alt="listing image">
+  <div class="card-body">
+    <p class="card-text"><b><%= i.title%></b>
+    <br>
+  &#8377;<%= i.price ? i.price.toLocaleString("en-IN") :"1200" %>/night
+<i class="gst">&nbsp; &nbsp;+18%-GST</i>
+
+</p>
+  </div>
+</div>
+</a>
+  <% } %>
+  </div>
+  <script>
+    let taxswich = document.querySelector("#switchCheckDefault");
+    taxswich.addEventListener("click",()=>
+  {
+   let texinfo = document.querySelectorAll(".gst");
+   for( i of texinfo)
+   {
+    if(i.style.display !="inline")
+   {
+     i.style.display = "inline";
+   }
+   else{
+     i.style.display = "none";
+   }
+   
+   }
+  })
+  </script>
